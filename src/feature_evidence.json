@@ -1,0 +1,43 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-the-admin-login-page-bootstrap-gating-logic-so-that-a-signed-in-user-whose-stored-profile-email-is-either-mohamed-afrith-s-ciet-gmail-com-or-afriyaafathima-gmail-com-can-see-and-use-the-claim-owner-admin-access-action-only-when-bootstrapping-is-permitted-by-the-backend",
+      "featureTitle": "Update the Admin Login page bootstrap gating logic so that a signed-in user whose stored profile email is either \"mohamed.afrith.s.ciet@gmail.com\" or \"afriyaafathima@gmail.com\" can see and use the \"Claim Owner Admin Access\" action (only when bootstrapping is permitted by the backend).",
+      "files": [
+        "frontend/src/pages/auth/AdminLoginPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-32"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-app-supports-granting-admin-access-to-the-account-identified-by-email-afriyaafathima-gmail-com-via-the-existing-admin-grant-by-email-flow-and-add-adjust-any-user-facing-error-text-so-it-clearly-instructs-that-the-target-user-must-sign-in-and-complete-profile-setup-first-before-they-can-be-granted-admin-by-email",
+      "featureTitle": "Ensure the app supports granting admin access to the account identified by email \"afriyaafathima@gmail.com\" via the existing admin-grant-by-email flow, and add/adjust any user-facing error text so it clearly instructs that the target user must sign in and complete profile setup first before they can be granted admin by email.",
+      "files": [
+        "frontend/src/pages/admin/AdminDashboardPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-33"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

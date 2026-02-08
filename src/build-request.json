@@ -1,0 +1,85 @@
+{
+  "kind": "build_request",
+  "title": "Allow owner bootstrap and admin granting for afriyaafathima@gmail.com (resolve persistent Access Denied)",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-31",
+      "text": "Update the owner/first-admin bootstrap configuration to allow bootstrapping the first administrator (only when no admin exists yet) using the email address \"afriyaafathima@gmail.com\" in addition to the existing owner email \"mohamed.afrith.s.ciet@gmail.com\".",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "can i share another account make this account admin afriyaafathima@gmail.com"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When there are zero admins in the canister, calling the existing bootstrap path (add admin by email) with \"afriyaafathima@gmail.com\" successfully makes the matching profile principal an admin.",
+        "When at least one admin already exists, attempting to bootstrap via the owner-email path does not grant admin and returns a clear error (no privilege escalation).",
+        "Existing behavior for \"mohamed.afrith.s.ciet@gmail.com\" remains unchanged."
+      ]
+    },
+    {
+      "id": "REQ-32",
+      "text": "Update the Admin Login page bootstrap gating logic so that a signed-in user whose stored profile email is either \"mohamed.afrith.s.ciet@gmail.com\" or \"afriyaafathima@gmail.com\" can see and use the \"Claim Owner Admin Access\" action (only when bootstrapping is permitted by the backend).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "did not solve this error ... make this account admin afriyaafathima@gmail.com"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin Login page shows the owner-bootstrap call-to-action when the authenticated user's profile email matches either allowed owner email.",
+        "Clicking the bootstrap button calls the existing bootstrap mutation and, on success, the user is redirected to \"/admin\".",
+        "If the backend rejects bootstrap because an admin already exists, the UI shows an English error message instructing the user to contact an existing admin."
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "text": "Ensure the app supports granting admin access to the account identified by email \"afriyaafathima@gmail.com\" via the existing admin-grant-by-email flow, and add/adjust any user-facing error text so it clearly instructs that the target user must sign in and complete profile setup first before they can be granted admin by email.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "make this account admin afriyaafathima@gmail.com"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If an admin uses the existing \"Add admin by email\" flow with \"afriyaafathima@gmail.com\" and a user profile with that email exists, the role is granted and the user becomes admin.",
+        "If no user profile exists for \"afriyaafathima@gmail.com\", the backend returns a non-ambiguous error and the UI displays an English message indicating the user must sign in and create a profile first.",
+        "No new seller flow is introduced; changes apply only to admin/customer flows already present."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo; add migration.mo only if state schema changes require it.",
+    "Do not edit files under frontend/src/components/ui (Shadcn) or other immutablePaths listed in SYSTEM_CONTEXT.",
+    "All user-facing text must be in English."
+  ],
+  "nonGoals": [
+    "Adding third-party auth providers or email delivery/OTP verification.",
+    "Creating a new admin request/approval workflow outside the existing admin/owner bootstrap and admin-grant mechanisms.",
+    "Any changes to product browsing, cart, checkout, or orders unrelated to admin access."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Owner bootstrap CTA for second owner email + clearer admin-grant-by-email messaging",
+  "requirements": [
+    {
+      "id": "REQ-32",
+      "summary": "Allow either owner email to access the Admin Login bootstrap CTA and improve bootstrap error handling/redirect.",
+      "acceptanceCriteria": [
+        "Admin Login page shows the owner-bootstrap call-to-action when the authenticated user's profile email matches either allowed owner email.",
+        "Clicking the bootstrap button calls the existing bootstrap mutation and, on success, the user is redirected to \"/admin\".",
+        "If the backend rejects bootstrap because an admin already exists, the UI shows an English error message instructing the user to contact an existing admin."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/auth/AdminLoginPage.tsx",
+          "operation": "modify",
+          "description": "Update bootstrap gating to treat both \"mohamed.afrith.s.ciet@gmail.com\" and \"afriyaafathima@gmail.com\" as owner-eligible emails. Ensure the \"Claim Owner Admin Access\" action is visible for either email when the user is authenticated and has a saved profile, and that clicking it calls the existing useBootstrapOwnerAdmin mutation with the signed-in user's profile email. On success, ensure navigation to \"/admin\" occurs (keep/confirm current redirect behavior via admin status re-check). Improve English error messaging so that when bootstrap is rejected because an admin already exists, the user is instructed to contact an existing admin (no privilege escalation). Use the authorization component’s frontend error-handling guidance for trapped/unauthorized errors; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "summary": "Clarify Admin Dashboard “Add admin by email” flow errors and guidance so it’s clear the target user must sign in and complete profile setup first.",
+      "acceptanceCriteria": [
+        "If an admin uses the existing \"Add admin by email\" flow with \"afriyaafathima@gmail.com\" and a user profile with that email exists, the role is granted and the user becomes admin.",
+        "If no user profile exists for \"afriyaafathima@gmail.com\", the backend returns a non-ambiguous error and the UI displays an English message indicating the user must sign in and create a profile first.",
+        "No new seller flow is introduced; changes apply only to admin/customer flows already present."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/admin/AdminDashboardPage.tsx",
+          "operation": "modify",
+          "description": "Adjust the \"Grant Admin Access\" (By Email) helper text and toast error handling so that when the backend indicates no profile exists for the provided email (e.g., error contains \"No user profile found\"), the UI clearly instructs: the target user must sign in and complete profile setup first (including saving their email in the profile). Keep the flow limited to the existing admin/customer admin-grant mechanisms (no new seller flow). Use the authorization component’s frontend error-handling guidance for trapped/unauthorized errors; verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

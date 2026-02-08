@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 13,
+  "summary": "Shift Nexo Market scope toward an Amazon-like ecommerce experience with a single-admin inventory model: admin-only product creation/management, customers can browse/add to cart/checkout, include sample seeded order/data, and deliver a final production-ready product.",
+  "architectural_notes": [
+    "Project name: Nexo Market",
+    "Frontend: Next.js 14 (App Router) + Tailwind CSS",
+    "Backend: Next.js API Routes",
+    "Database: Supabase (PostgreSQL)",
+    "Auth: Supabase Auth (email + OTP)",
+    "Storage: Supabase Storage for product images",
+    "Payments: Razorpay integration",
+    "AI: OpenAI API (embeddings for semantic search; chatbot/recommendations/description generation)",
+    "Deployment: Vercel",
+    "UI/UX assets: Canva-based brand kit + multi-page website blueprint"
+  ],
+  "known_issues": [
+    "Admin login returns 'Access denied' for intended owner account; admin identity not recognized/bootstrapped correctly (user attempted with mohamed.afrith.s.ciet@gmail.com).",
+    "Admin access issue persists: user still cannot access Admin even after attempting correct Internet Identity; user requests making a different account (afriyaafathima@gmail.com) an admin, implying admin grant-by-email flow is needed/blocked by current access-denied state."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-implement-internet-identity-login-and-app-level-user-profiles-with-roles-buyer-seller-admin-including-a-safe-default-of-buyer-for-new-principals-and-an-admin-bootstrap-mechanism",
+      "title": "Implement Internet Identity login and app-level user profiles with roles (buyer, seller, admin), including a safe default of buyer for new principals and an admin bootstrap mechanism.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-marketplace-public-browsing-apis-and-ui-home-page-with-hero-section-6-category-grid-trending-products-deal-banner-testimonials-and-footer-content-for-nexo-market",
+      "title": "Implement marketplace public browsing APIs and UI: Home page with hero section, 6-category grid, trending products, deal banner, testimonials, and footer content for “Nexo Market”.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-product-listing-and-product-detail-experience-list-grid-view-with-filters-category-and-a-product-page-with-image-title-price-rating-display-features-description-and-similar-products",
+      "title": "Implement Product listing and Product detail experience: list/grid view with filters (category) and a Product page with image, title, price, rating display, features/description, and similar products.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-cart-page-and-cart-apis-add-to-cart-update-quantity-remove-items-and-show-order-summary-subtotal-taxes-placeholder-or-configured-rate-total",
+      "title": "Implement Cart page and cart APIs: add to cart, update quantity, remove items, and show order summary (subtotal, taxes placeholder or configured rate, total).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-checkout-flow-shipping-form-payment-form-non-3rd-party-confirm-order-and-order-confirmation-screen-create-an-order-from-the-current-cart-and-clear-the-cart-on-success",
+      "title": "Implement Checkout flow: shipping form, payment form (non-3rd-party), confirm order, and order confirmation screen; create an Order from the current Cart and clear the Cart on success.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-seller-dashboard-seller-profile-product-crud-create-edit-list-product-status-draft-pending-approved-rejected-and-an-add-product-flow-with-image-urls-referencing-static-assets",
+      "title": "Implement Seller dashboard: seller profile, product CRUD (create/edit/list), product status (draft/pending/approved/rejected), and an “Add Product” flow with image URLs referencing static assets.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-admin-dashboard-stats-blocks-approvals-queue-for-pending-products-approve-reject-with-reason-and-commissions-list-mvp-configurable-commission-rate-and-computed-totals-per-order-seller",
+      "title": "Implement Admin dashboard: stats blocks, approvals queue for pending products (approve/reject with reason), and commissions list (MVP: configurable commission rate and computed totals per order/seller).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-frontend-architecture-add-routing-for-all-pages-home-product-cart-checkout-seller-dashboard-admin-dashboard-use-react-query-for-all-canister-calls-and-ensure-all-user-facing-text-is-in-english",
+      "title": "Frontend architecture: add routing for all pages (Home, Product, Cart, Checkout, Seller Dashboard, Admin Dashboard), use React Query for all canister calls, and ensure all user-facing text is in English.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-visual-theme-for-nexo-market-using-the-provided-brand-direction-blue-1a3dff-gold-f2c94c-dark-gray-333333-white-ffffff-with-modern-marketplace-styling-consistent-typography-spacing-and-component-treatment-across-all-pages",
+      "title": "Apply a coherent visual theme for Nexo Market using the provided brand direction (Blue #1A3DFF, Gold #F2C94C, Dark Gray #333333, White #FFFFFF) with modern marketplace styling, consistent typography, spacing, and component treatment across all pages.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-image-assets-and-render-them-in-the-ui-nexo-market-logo-hero-banner-image-and-six-category-icons-matching-the-marketplace-theme",
+      "title": "Add generated static image assets and render them in the UI: Nexo Market logo, hero banner image, and six category icons matching the marketplace theme.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-revise-the-overall-ui-ux-to-an-amazon-inspired-layout-using-the-uploaded-screenshots-as-visual-reference-while-keeping-the-app-branding-as-nexo-market-and-not-copying-any-amazon-trademarks-or-assets-layout-inspired-only",
+      "title": "Revise the overall UI/UX to an Amazon-inspired layout using the uploaded screenshots as visual reference, while keeping the app branding as “Nexo Market” and not copying any Amazon trademarks or assets (layout-inspired only).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-the-marketplace-model-to-admin-only-inventory-management-only-admins-can-create-edit-approve-publish-or-reject-products-non-admin-users-must-not-have-any-ui-entry-points-for-creating-editing-products",
+      "title": "Change the marketplace model to admin-only inventory management: only admins can create, edit, approve/publish, or reject products; non-admin users must not have any UI entry points for creating/editing products.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-product-management-section-that-supports-creating-and-editing-products-title-description-price-currency-category-inventory-imageurl-and-publishing-them-as-approved-so-they-appear-in-the-storefront",
+      "title": "Add an Admin Product Management section that supports creating and editing products (title, description, price, currency, category, inventory, imageUrl) and publishing them as approved so they appear in the storefront.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-customer-shopping-flow-to-be-production-complete-product-cards-and-cart-lines-must-display-real-product-title-image-unit-price-line-totals-and-computed-cart-subtotal-tax-total-based-on-cart-contents",
+      "title": "Update the customer shopping flow to be production-complete: product cards and cart lines must display real product title, image, unit price, line totals, and computed cart subtotal/tax/total based on cart contents.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-orders-page-for-customers-amazon-style-returns-orders-entry-point-that-lists-the-authenticated-user-s-past-orders-and-allows-opening-an-order-detail-confirmation-view",
+      "title": "Add an Orders page for customers (Amazon-style “Returns & Orders” entry point) that lists the authenticated user’s past orders and allows opening an order detail/confirmation view.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-align-routing-and-navigation-with-the-new-admin-only-inventory-model-remove-or-disable-seller-routes-and-add-routes-for-orders-and-admin-product-management-while-keeping-all-user-facing-text-in-english",
+      "title": "Align routing and navigation with the new admin-only inventory model: remove or disable seller routes and add routes for Orders and Admin Product Management, while keeping all user-facing text in English.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-dedicated-role-specific-login-entry-pages-for-admin-and-customer-create-a-customer-login-page-e-g-login-and-an-admin-login-page-e-g-login-admin-that-clearly-label-the-intended-audience-and-use-internet-identity-sign-in",
+      "title": "Add dedicated, role-specific login entry pages for Admin and Customer: create a Customer login page (e.g., \"/login\") and an Admin login page (e.g., \"/login/admin\") that clearly label the intended audience and use Internet Identity sign-in.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-post-login-redirects-based-on-the-entry-flow-and-role-after-signing-in-from-the-admin-login-page-redirect-admins-to-admin-and-non-admins-to-an-access-denied-experience-after-signing-in-from-the-customer-login-page-redirect-to-the-storefront-and-do-not-expose-admin-navigation-options",
+      "title": "Implement post-login redirects based on the entry flow and role: after signing in from the Admin login page, redirect admins to \"/admin\" and non-admins to an access-denied experience; after signing in from the Customer login page, redirect to the storefront (\"/\") and do not expose admin navigation options.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-clear-navigation-entry-points-for-the-separate-login-flows-provide-distinct-options-for-customer-sign-in-and-admin-sign-in-in-the-ui-for-unauthenticated-users-without-adding-any-seller-login-flow",
+      "title": "Add clear navigation entry points for the separate login flows: provide distinct options for \"Customer Sign In\" and \"Admin Sign In\" in the UI for unauthenticated users, without adding any seller login flow.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-signed-in-user-can-receive-admin-privileges-needed-to-add-edit-products-and-change-prices-by-providing-an-in-app-admin-bootstrap-path-or-a-documented-procedure-that-uses-the-existing-backend-admin-authorization-system-the-app-must-make-it-possible-to-verify-that-the-intended-principal-is-an-admin-and-can-access-product-management-screens",
+      "title": "Ensure the signed-in user can receive admin privileges needed to add/edit products and change prices by providing an in-app/admin-bootstrap path or a documented procedure that uses the existing backend admin authorization system; the app must make it possible to verify that the intended principal is an admin and can access product management screens.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-safe-first-admin-owner-bootstrap-flow-so-that-the-user-who-signs-in-with-internet-identity-and-has-the-email-mohamed-afrith-s-ciet-gmail-com-saved-in-their-user-profile-can-become-the-initial-admin-when-no-admin-exists-yet",
+      "title": "Implement a safe first-admin (owner) bootstrap flow so that the user who signs in with Internet Identity and has the email \"mohamed.afrith.s.ciet@gmail.com\" saved in their user profile can become the initial admin when no admin exists yet.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-admin-login-page-to-provide-an-in-app-owner-bootstrap-path-when-a-signed-in-user-is-not-an-admin-including-clear-instructions-to-first-complete-profile-setup-with-the-owner-email-and-then-claim-admin-access-only-available-when-no-admin-exists",
+      "title": "Update the Admin Login page to provide an in-app owner bootstrap path when a signed-in user is not an admin, including clear instructions to first complete profile setup with the owner email and then claim admin access (only available when no admin exists).",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-admin-role-management-to-support-granting-admin-access-by-either-principal-id-existing-behavior-and-by-email-lookup-in-stored-user-profiles-so-the-owner-can-add-other-customers-as-admins-without-needing-to-copy-paste-principals",
+      "title": "Extend admin role management to support granting admin access by either principal ID (existing behavior) and by email (lookup in stored user profiles), so the owner can add other customers as admins without needing to copy/paste principals.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-admin-login-ui-to-support-the-confirmed-owner-bootstrap-by-principal-id-so-the-user-can-claim-admin-access-even-if-their-profile-email-does-not-match-the-owner-email-as-long-as-the-signed-in-principal-matches-ucqy5-atlj5-rnonu-hzbpj-knqok-62nn2-7ygyh-5pj36-nbwuc-pfihd-aae-and-no-admin-exists-yet",
+      "title": "Update the Admin Login UI to support the confirmed owner bootstrap by Principal ID so the user can claim admin access even if their profile email does not match the owner email, as long as the signed-in principal matches \"ucqy5-atlj5-rnonu-hzbpj-knqok-62nn2-7ygyh-5pj36-nbwuc-pfihd-aae\" and no admin exists yet.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-admin-login-page-bootstrap-gating-logic-so-that-a-signed-in-user-whose-stored-profile-email-is-either-mohamed-afrith-s-ciet-gmail-com-or-afriyaafathima-gmail-com-can-see-and-use-the-claim-owner-admin-access-action-only-when-bootstrapping-is-permitted-by-the-backend",
+      "title": "Update the Admin Login page bootstrap gating logic so that a signed-in user whose stored profile email is either \"mohamed.afrith.s.ciet@gmail.com\" or \"afriyaafathima@gmail.com\" can see and use the \"Claim Owner Admin Access\" action (only when bootstrapping is permitted by the backend).",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-app-supports-granting-admin-access-to-the-account-identified-by-email-afriyaafathima-gmail-com-via-the-existing-admin-grant-by-email-flow-and-add-adjust-any-user-facing-error-text-so-it-clearly-instructs-that-the-target-user-must-sign-in-and-complete-profile-setup-first-before-they-can-be-granted-admin-by-email",
+      "title": "Ensure the app supports granting admin access to the account identified by email \"afriyaafathima@gmail.com\" via the existing admin-grant-by-email flow, and add/adjust any user-facing error text so it clearly instructs that the target user must sign in and complete profile setup first before they can be granted admin by email.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Implement core ecommerce marketplace (User, Product, Cart/Orders, Seller, Admin modules) for Nexo Market",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Integrate Supabase (Postgres schema, Auth email+OTP, Storage for product images) with Next.js API routes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Integrate Razorpay checkout/payment flow (India-ready) with order confirmation and tracking",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add AI features via OpenAI: semantic product search (embeddings+vectors in Supabase), recommendations, support chatbot, auto-generated product descriptions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add security: JWT/session handling, role-based access control (user/seller/admin), secure API routes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Produce complete Canva UI/UX deliverables for Nexo Market: brand kit, page-by-page structure, section-by-section copy-ready layout (home/product/cart/checkout/seller/admin)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Deployment/go-live deliverables: Vercel deployment steps + publishable/live-ready workflow (including Chrome-ready verification)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Create backend data models and stable persistence for: Categories, Products, Sellers, Carts, and Orders suitable for a marketplace MVP.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Change marketplace model to admin-only product management (no seller product creation); enforce RBAC so only admins can add/edit products while customers can browse/cart/buy.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Revise UI/UX to closely match Amazon-style page layouts and feature completeness across key flows (home, listing, product detail, cart, checkout, order confirmation).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add seeded sample data including at least one sample order (and supporting products/users) for demo/review.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Implement missing backend canister APIs needed by the existing React Query hooks for Categories, Products, Cart, Orders, User Profiles, and Admin operations, replacing the current frontend mock returns.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Seed demo data in stable canister state, including products/categories and at least one sample order, so the app is reviewable immediately after deploy without manual setup.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Add separate role-based login/entry flows: dedicated Admin login (redirect to Admin Dashboard) and Customer login (redirect to storefront); enforce permissions so only Admin can add/edit products/prices/inventory.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Add admin user/role management: allow the owner/admin to grant admin access to other users (by email/principal) and manage roles so additional admins can manage products.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Fix the admin-check/role-check backend APIs used by the frontend so that admin login does not incorrectly result in an \"Access Denied\" state for a valid admin, and role queries do not trap on success paths.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Add a backend owner bootstrap mechanism that grants the initial admin role to the confirmed owner Principal ID \"ucqy5-atlj5-rnonu-hzbpj-knqok-62nn2-7ygyh-5pj36-nbwuc-pfihd-aae\" when (and only when) no admin exists yet, so that this principal can access all admin-only APIs.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Ensure the backend exposes a non-trapping admin check API used by the frontend (\"isCallerAdmin\") that returns a boolean reflecting whether the current caller is an admin.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Update the owner/first-admin bootstrap configuration to allow bootstrapping the first administrator (only when no admin exists yet) using the email address \"afriyaafathima@gmail.com\" in addition to the existing owner email \"mohamed.afrith.s.ciet@gmail.com\".",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Nexo Market",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,44 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-08T06:14:31.407Z",
+  "summary": "Diff implements frontend gating for owner bootstrap for two allowed emails and improves UI error messaging for add-admin-by-email when no profile exists. Backend shows new constants for a secondary bootstrap email and introduces a migration module wiring, but the diff excerpt does not provide enough evidence that the backend bootstrap/grant logic and error behaviors fully meet the stated acceptance criteria.",
+  "missing_requirements": [
+    {
+      "id": "REQ-31",
+      "requirement": "Backend bootstrap must allow first-admin bootstrapping with email \"afriyaafathima@gmail.com\" only when there are zero admins; when at least one admin exists it must reject with a clear error; existing behavior for \"mohamed.afrith.s.ciet@gmail.com\" unchanged.",
+      "reason": "backend/main.mo shows constants for both emails, but the diff excerpt does not include the actual bootstrap function logic (checking admin count == 0, allowing either email only in that case, and returning a clear error when an admin already exists).",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "requirement": "Backend must return a non-ambiguous error when add-admin-by-email is used for an email that has no existing user profile (and the app must support granting admin for afriyaafathima@gmail.com when a matching profile exists).",
+      "reason": "Frontend AdminDashboardPage handles an error substring 'No user profile found', but the diff excerpt does not show backend add-admin-by-email implementation or its exact error text/behavior.",
+      "evidence": [
+        "frontend/src/pages/admin/AdminDashboardPage.tsx",
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Introduced a backend state migration module and wired migration into the main actor.",
+      "reason": "BuildRequest allows adding migration.mo only if state schema changes require it; the added migration appears to be a no-op (OldActor and NewActor types are identical in the shown file), and the BuildRequest did not request a migration.",
+      "evidence": [
+        "backend/migration.mo",
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/pages/admin/AdminDashboardPage.tsx",
+    "frontend/src/pages/auth/AdminLoginPage.tsx",
+    "project_state.json"
+  ]
+}
